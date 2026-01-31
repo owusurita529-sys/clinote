@@ -19,6 +19,18 @@ cargo build --release
 ./target/release/clinote --help
 ```
 
+## Quickstart commands
+```bash
+# Convert a note
+clinote parse --input notes/sample.txt --format soap --out output.json --out-format json
+
+# Validate a note (strict)
+clinote validate notes/sample.txt --template soap --strict
+
+# Preview sections and line counts
+clinote preview notes/sample.txt --template soap
+```
+
 ### Parse a single note
 ```bash
 clinote parse --input notes/sample.txt --format soap \
@@ -39,6 +51,25 @@ clinote sample --out-dir samples --n 6 --bundles 2
 ### Validate config
 ```bash
 clinote validate --config clinote.toml
+```
+
+## Validation and preview
+- **Strict mode** (`--strict`) treats missing required sections as errors.
+- **Non-strict mode** treats missing required sections as warnings.
+- Exit codes: `0` when no errors, `2` when errors exist.
+
+Example:
+```bash
+clinote validate notes/sample.txt --template hp --strict --json
+clinote preview notes/sample.txt --template hp
+```
+
+## Selftest
+Run a sweep over many notes to validate quality at scale.
+```bash
+clinote selftest --fixtures tests/fixtures --template soap --strict
+clinote selftest --fixtures "tests/fixtures/*.txt" --template hp --json
+clinote selftest --fixtures tests/fixtures --out selftest_outputs
 ```
 
 ## Example
