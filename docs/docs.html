@@ -36,6 +36,24 @@ clinote sample --out-dir samples --n 6 --bundles 2
 
 clinote validate --config clinote.toml</code></pre>
 
+      <h2>CLI Commands</h2>
+      <pre class="code-block"><code># Validate a note (strict mode + exit code 2 on errors)
+clinote validate notes.txt --template soap --strict
+
+# Preview detected sections with line counts
+clinote preview notes.txt --template hp
+
+# Selftest a directory (recursive) and export outputs
+clinote selftest --fixtures tests/fixtures --template soap --out selftest_outputs
+
+# Selftest with glob + JSON summary
+clinote selftest --fixtures "tests/fixtures/*.txt" --template discharge --json</code></pre>
+      <ul class="doc-list">
+        <li><strong>Validate strict:</strong> missing required sections are errors (exit code 2). Non-strict treats them as warnings (exit code 0).</li>
+        <li><strong>Preview:</strong> prints detected sections plus line/character counts.</li>
+        <li><strong>Selftest:</strong> scans a folder or glob, validates notes, and reports totals + top failures.</li>
+      </ul>
+
       <h2>Config reference</h2>
       <pre class="code-block"><code>[formats.soap]
 section_order = ["Subjective", "Objective", "Assessment", "Plan"]
