@@ -7,3 +7,5 @@ pub mod render;
 pub mod reports;
 pub mod samples;
 pub mod util;
+pub mod validate;
+pub mod selftest;
